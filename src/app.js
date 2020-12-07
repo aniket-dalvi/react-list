@@ -21,6 +21,7 @@ function TextFieldContainer(props) {
     if (e.key === "Enter") {
       if (friendName) {
         const list = addNewFriend(friendName, props.list);
+        localStorage.setItem("list", JSON.stringify(list));
         props.getList(list, true);
         setFriendName("");
       } else {
@@ -54,7 +55,7 @@ function TextFieldContainer(props) {
   );
 }
 
-function sortByFav(arr) {
+function sortData(arr) {
   const favFriendArr = [];
     const normalFriendArr = [];
     arr.forEach((result) => {
@@ -67,17 +68,17 @@ function sortByFav(arr) {
     return [...favFriendArr, ...normalFriendArr]; 
 }
 
-function FriendListCard({ list, currentPageNumber, updateList }) {
+function FriendListCard({ list, currentPageNumber, updateList, updatedIndex, isSearched }) {
   const listData = list? [...list]: [];
 
   const onFavClick = (data, index) => {
     const listItems = JSON.parse(localStorage.getItem("list"));
     const currentIndex = currentPageNumber > 1 ? ((currentPageNumber-1)*4)+(index): currentPageNumber*index;
     listItems[currentIndex].fav = !data?.fav;
-    
-    const sortedList = sortByFav(listItems);
+    const sortedList = sortData(listItems);
     localStorage.setItem("list", JSON.stringify(sortedList));
-    updateList(currentIndex);
+    updatedIndex(currentIndex);
+    updateList(listItems[currentIndex]);
   };
 
   const onDeleteClick = (index) => {
@@ -85,9 +86,10 @@ function FriendListCard({ list, currentPageNumber, updateList }) {
     const currentIndex = currentPageNumber > 1 ? ((currentPageNumber-1)*4)+(index): currentPageNumber*index;
     delete listItems.splice(currentIndex, 1);
     
-    const sortedList = sortByFav(listItems);
+    const sortedList = sortData(listItems);
     localStorage.setItem("list", JSON.stringify(sortedList));
-    updateList(currentIndex);
+    updatedIndex(currentIndex);
+    updateList(listItems[currentIndex]);
   };
 
   return listData.map((result, index) => (
@@ -96,7 +98,7 @@ function FriendListCard({ list, currentPageNumber, updateList }) {
         <label className="card-label">{result?.name}</label>
         <label className="card-desc">is your friend</label>
       </div>
-      <div className="card-actions">
+      {!isSearched && <div className="card-actions">
         <button
           className={`card-actions-btn${result?.fav ? "-fav" : ""} `}
           onClick={() => onFavClick(result, index)}
@@ -113,7 +115,7 @@ function FriendListCard({ list, currentPageNumber, updateList }) {
         >
           <MdDelete color={"#cccaca"} size={18} />
         </button>
-      </div>
+      </div>}
     </div>
   ));
 }
@@ -131,7 +133,7 @@ function PaginationComponent(props) {
       selectedCounter === 1 ? 0 : props.maxElement * (selectedCounter - 1);
     for (let i = initial; i < props.maxElement * selectedCounter; i++) {
       if (listItems[i]) {
-        searchedList.push(listItems[i]); 
+        searchedList.push(listItems[i]);
       }
     }
     props.getList(searchedList);
@@ -148,7 +150,9 @@ function PaginationComponent(props) {
         <button
           className="next-prev"
           disabled={counter > props.slot? false: true}
-          onClick={() => setCounter(counter - props.slot)}
+          onClick={() => {
+            setCounter(counter - props.slot)
+          }}
         >
           <MdKeyboardArrowLeft color={"#cccaca"} size={18} />
         </button>
@@ -182,7 +186,9 @@ function PaginationComponent(props) {
         <button
           className="next-prev"
           disabled={counter*props.maxElement < listItems.length? false: true}
-          onClick={() => setCounter(counter + props.slot)}
+          onClick={() => {
+            setCounter(counter + props.slot)
+          }}
         >
           <MdKeyboardArrowRight color={"#cccaca"} size={18} />
         </button>
@@ -201,9 +207,42 @@ function usePrevious(value) {
 
 function App() {
   const listItems = JSON.parse(localStorage.getItem("list"));
+  const prevListItems = usePrevious(listItems);
   const [displayData, setDisplayData] = useState(null);
   const [isSearched, setSearchFlag] = useState(false);
   const [pageNumber, setPageNumber] = useState(1);
+  const [maxElement, setMaxElements] = useState(4);
+  const [isUpdatedIndex, setUpdatedIndex] = useState(null);
+  const [isUpdatedItem, setUpdate] = useState(null);
+  const [resetList, setResetList] = useState(false);
+
+  const getIndex = (arr) => arr?.length && arr.findIndex(res => res?.name === isUpdatedItem?.name);
+
+  useEffect(() => {
+    if(listItems?.length !== prevListItems?.length) {
+      const searchedList = [];
+      const initial =
+        pageNumber === 1 ? 0 : maxElement * (pageNumber - 1);
+      for (let i = initial; i < maxElement * pageNumber; i++) {
+        if (listItems[i]) {
+          searchedList.push(listItems[i]);
+        }
+      }
+      setDisplayData(searchedList);
+    } else {
+      if(getIndex(prevListItems) === isUpdatedIndex && prevListItems[isUpdatedIndex]?.fav !== isUpdatedItem?.fav) {
+        const searchedList = [];
+        const initial =
+          pageNumber === 1 ? 0 : maxElement * (pageNumber - 1);
+        for (let i = initial; i < maxElement * pageNumber; i++) {
+          if (listItems[i]) {
+            searchedList.push(listItems[i]);
+          }
+        }
+        setDisplayData(searchedList);
+      }
+    }
+  }, [listItems])
 
   const setFriendList = (list, isUpdated = false) => {
     setSearchFlag(!isUpdated);
@@ -222,6 +261,9 @@ function App() {
           <FriendListCard
             list={displayData}
             currentPageNumber={pageNumber}
+            updateList={item => setUpdate(item)}
+            updatedIndex={index => setUpdatedIndex(index)}
+            isSearched={isSearched}
           />
         ) : (
           <div className="no-data">
@@ -231,9 +273,13 @@ function App() {
       </div>
       {listItems && !isSearched && (
         <PaginationComponent
-          maxElement={4}
-          getList={(list) => setDisplayData(list)}
+          maxElement={maxElement}
+          getList={(list) => {
+            setDisplayData(list)
+            setResetList(false)
+          }}
           slot={5}
+          resetList={resetList}
           currentPageNumber={(pageNo) => setPageNumber(pageNo)}
         />
       )}
