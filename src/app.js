@@ -14,6 +14,27 @@ function addNewFriend(name, friendList) {
     : [{ name, fav: false }];
 }
 
+function sortData(arr) {
+  const favFriendArr = [];
+  const normalFriendArr = [];
+  arr.forEach((result) => {
+    if (result?.fav) {
+      favFriendArr.push(result);
+    } else {
+      normalFriendArr.push(result);
+    }
+  });
+  return [...favFriendArr, ...normalFriendArr];
+}
+
+function usePrevious(value) {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+}
+
 function TextFieldContainer(props) {
   const [friendName, setFriendName] = useState("");
 
@@ -23,7 +44,7 @@ function TextFieldContainer(props) {
         const existingUser = props?.list?.findIndex(
           (result) => (result.name).toLowerCase() == friendName.toLowerCase()
         );
-        if (existingUser === -1 || !props.list) {
+        if (existingUser === -1 || !props) {
           const list = addNewFriend(friendName, props.list);
           localStorage.setItem("list", JSON.stringify(list));
           props.getList(list, true);
@@ -60,19 +81,6 @@ function TextFieldContainer(props) {
       />
     </div>
   );
-}
-
-function sortData(arr) {
-  const favFriendArr = [];
-  const normalFriendArr = [];
-  arr.forEach((result) => {
-    if (result?.fav) {
-      favFriendArr.push(result);
-    } else {
-      normalFriendArr.push(result);
-    }
-  });
-  return [...favFriendArr, ...normalFriendArr];
 }
 
 function FriendListCard({
@@ -146,26 +154,41 @@ function PaginationComponent(props) {
   const count = (listItems?.length / props.maxElement).toFixed();
   const totalPageCount =
     count >= listItems?.length / props.maxElement ? count : parseInt(count) + 1;
+  const prevPageCount = usePrevious(totalPageCount);
+  
   const [counter, setCounter] = useState(props.slot);
-  const [selectedCounter, setSelectedCounter] = useState(1);
-
+  const [selectedCounter, setSelectedCounter] = useState(props.activeCounter);
+  const [pageNo, setPageNo] = useState([])
+ 
   useEffect(() => {
     const searchedList = [];
+    console.log("selectedCounter", selectedCounter);
     const initial =
       selectedCounter === 1 ? 0 : props.maxElement * (selectedCounter - 1);
+      console.log("initial", initial)
     for (let i = initial; i < props.maxElement * selectedCounter; i++) {
       if (listItems[i]) {
         searchedList.push(listItems[i]);
       }
     }
+    console.log(searchedList)
     props.getList(searchedList);
   }, [selectedCounter]);
 
-  const pageNo = [];
-  for (let i = 1; i <= totalPageCount; i++) {
-    pageNo.push(i);
-  }
-
+  useEffect(() => {
+    const pageNoArr = [];
+    for (let i = 1; i <= totalPageCount; i++) {
+      pageNoArr.push(i);
+    }
+    setPageNo(pageNoArr);
+    console.log("prevPageCount", prevPageCount);
+    console.log("totalPageCount", totalPageCount);
+    if(prevPageCount > totalPageCount) {
+      setSelectedCounter(parseInt(selectedCounter));
+      props.currentPageNumber(selectedCounter);
+    } 
+  }, [totalPageCount]);
+  
   return totalPageCount > 1 ? (
     <div className="pagination-container">
       {totalPageCount > props.slot && (
@@ -219,14 +242,6 @@ function PaginationComponent(props) {
       )}
     </div>
   ) : null;
-}
-
-function usePrevious(value) {
-  const ref = useRef();
-  useEffect(() => {
-    ref.current = value;
-  });
-  return ref.current;
 }
 
 function App() {
@@ -305,8 +320,12 @@ function App() {
             setResetList(false);
           }}
           slot={5}
+          activeCounter={pageNumber}
           resetList={resetList}
-          currentPageNumber={(pageNo) => setPageNumber(pageNo)}
+          currentPageNumber={(pageNo) => {
+            console.log("pageNo:", pageNo)
+            setPageNumber(pageNo)
+          }}
         />
       )}
     </>
