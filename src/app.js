@@ -42,7 +42,7 @@ function TextFieldContainer(props) {
     if (e.key === "Enter") {
       if (friendName) {
         const existingUser = props?.list?.findIndex(
-          (result) => (result.name).toLowerCase() == friendName.toLowerCase()
+          (result) => result.name.toLowerCase() == friendName.toLowerCase()
         );
         if (existingUser === -1 || !props) {
           const list = addNewFriend(friendName, props.list);
@@ -155,23 +155,20 @@ function PaginationComponent(props) {
   const totalPageCount =
     count >= listItems?.length / props.maxElement ? count : parseInt(count) + 1;
   const prevPageCount = usePrevious(totalPageCount);
-  
+
   const [counter, setCounter] = useState(props.slot);
   const [selectedCounter, setSelectedCounter] = useState(props.activeCounter);
-  const [pageNo, setPageNo] = useState([])
- 
+  const [pageNo, setPageNo] = useState([]);
+
   useEffect(() => {
     const searchedList = [];
-    console.log("selectedCounter", selectedCounter);
     const initial =
       selectedCounter === 1 ? 0 : props.maxElement * (selectedCounter - 1);
-      console.log("initial", initial)
     for (let i = initial; i < props.maxElement * selectedCounter; i++) {
       if (listItems[i]) {
         searchedList.push(listItems[i]);
       }
     }
-    console.log(searchedList)
     props.getList(searchedList);
   }, [selectedCounter]);
 
@@ -181,14 +178,13 @@ function PaginationComponent(props) {
       pageNoArr.push(i);
     }
     setPageNo(pageNoArr);
-    console.log("prevPageCount", prevPageCount);
-    console.log("totalPageCount", totalPageCount);
-    if(prevPageCount > totalPageCount) {
+
+    if (prevPageCount > totalPageCount) {
       setSelectedCounter(parseInt(selectedCounter));
       props.currentPageNumber(selectedCounter);
-    } 
+    }
   }, [totalPageCount]);
-  
+
   return totalPageCount > 1 ? (
     <div className="pagination-container">
       {totalPageCount > props.slot && (
@@ -322,10 +318,7 @@ function App() {
           slot={5}
           activeCounter={pageNumber}
           resetList={resetList}
-          currentPageNumber={(pageNo) => {
-            console.log("pageNo:", pageNo)
-            setPageNumber(pageNo)
-          }}
+          currentPageNumber={(pageNo) => setPageNumber(pageNo)}
         />
       )}
     </>
