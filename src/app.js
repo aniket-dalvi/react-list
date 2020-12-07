@@ -20,14 +20,16 @@ function TextFieldContainer(props) {
   const onKeyPress = (e) => {
     if (e.key === "Enter") {
       if (friendName) {
-        const existingUser = props?.list?.findIndex(result => (result.name).toLowerCase() === (friendName).toLowerCase());
-        if (existingUser !== -1) {
-          alert('This friend already exist in your list.')
-        } else {
+        const existingUser = props?.list?.findIndex(
+          (result) => (result.name).toLowerCase() == friendName.toLowerCase()
+        );
+        if (existingUser === -1 || !props.list) {
           const list = addNewFriend(friendName, props.list);
           localStorage.setItem("list", JSON.stringify(list));
           props.getList(list, true);
           setFriendName("");
+        } else {
+          alert("This friend already exist in your list.");
         }
       } else {
         alert("Please enter friend name.");
