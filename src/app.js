@@ -44,13 +44,20 @@ function TextFieldContainer(props) {
         const existingUser = props?.list?.findIndex(
           (result) => result.name.toLowerCase() == friendName.toLowerCase()
         );
-        if (existingUser === -1 || !props) {
+        if(props.list) {
+          if (existingUser) {
+            const list = addNewFriend(friendName, props.list);
+            localStorage.setItem("list", JSON.stringify(list));
+            props.getList(list, true);
+            setFriendName("");
+          } else {
+            alert("This friend already exist in your list.");
+          }
+        } else {
           const list = addNewFriend(friendName, props.list);
           localStorage.setItem("list", JSON.stringify(list));
           props.getList(list, true);
           setFriendName("");
-        } else {
-          alert("This friend already exist in your list.");
         }
       } else {
         alert("Please enter friend name.");
@@ -123,7 +130,7 @@ function FriendListCard({
     <div className="card" key={index}>
       <div className="card-data">
         <label className="card-label">{result?.name}</label>
-        <label className="card-desc">is your friend</label>
+        <label className="card-desc">is yours friend</label>
       </div>
       {!isSearched && (
         <div className="card-actions">
@@ -288,7 +295,7 @@ function App() {
 
   return (
     <>
-      <div className="container">
+      <div className="\ m">
         <TextFieldContainer
           getList={(list, isUpdated) => setFriendList(list, isUpdated)}
           resetList={(val) => setSearchFlag(val)}

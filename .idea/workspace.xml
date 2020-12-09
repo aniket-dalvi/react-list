@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="832b7b4b-11df-464c-afbc-be378d811157" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/_test_/app.test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/setupTests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.babelrc" beforeDir="false" afterPath="$PROJECT_DIR$/.babelrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_test_/app.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/_test_/app.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +29,34 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Jest.app">
+    <configuration name="app suite" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/_test_/app.test.js" />
+      <test-names>
+        <test-name value="app suite" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="app suite.should mount in a full DOM" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/_test_/app.test.js" />
+      <test-names>
+        <test-name value="app suite" />
+        <test-name value="should mount in a full DOM" />
+      </test-names>
+      <method v="2" />
+    </configuration>
     <configuration name="app" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -48,6 +73,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Jest.app" />
+        <item itemvalue="Jest.app suite" />
+        <item itemvalue="Jest.app suite.should mount in a full DOM" />
       </list>
     </recent_temporary>
   </component>
@@ -59,7 +86,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1607490353025</updated>
-      <workItem from="1607490355684" duration="4920000" />
+      <workItem from="1607490355684" duration="7689000" />
+      <workItem from="1607530406252" duration="1067000" />
     </task>
     <servers />
   </component>
