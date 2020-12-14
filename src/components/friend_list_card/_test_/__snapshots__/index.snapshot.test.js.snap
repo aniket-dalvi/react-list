@@ -1,0 +1,146 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`friend list snapshot snapshot:  1`] = `
+Array [
+  <div
+    className="card"
+  >
+    <div
+      className="card-data"
+    >
+      <label
+        className="card-label"
+      >
+        Demo
+      </label>
+      <label
+        className="card-desc"
+      >
+        is yours friend
+      </label>
+    </div>
+    <div
+      className="card-actions"
+    >
+      <button
+        className="card-actions-btn "
+        onClick={[Function]}
+      >
+        <svg
+          color="#cccaca"
+          fill="currentColor"
+          height={18}
+          stroke="currentColor"
+          strokeWidth="0"
+          style={
+            Object {
+              "color": "#cccaca",
+            }
+          }
+          viewBox="0 0 24 24"
+          width={18}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M22 9.24l-7.19-.62L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.63-7.03L22 9.24zM12 15.4l-3.76 2.27 1-4.28-3.32-2.88 4.38-.38L12 6.1l1.71 4.04 4.38.38-3.32 2.88 1 4.28L12 15.4z"
+          />
+        </svg>
+      </button>
+      <button
+        className="card-actions-btn"
+        onClick={[Function]}
+      >
+        <svg
+          color="#cccaca"
+          fill="currentColor"
+          height={18}
+          stroke="currentColor"
+          strokeWidth="0"
+          style={
+            Object {
+              "color": "#cccaca",
+            }
+          }
+          viewBox="0 0 24 24"
+          width={18}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>,
+  <div
+    className="card"
+  >
+    <div
+      className="card-data"
+    >
+      <label
+        className="card-label"
+      >
+        Demo1
+      </label>
+      <label
+        className="card-desc"
+      >
+        is yours friend
+      </label>
+    </div>
+    <div
+      className="card-actions"
+    >
+      <button
+        className="card-actions-btn-fav "
+        onClick={[Function]}
+      >
+        <svg
+          color="#fff76a"
+          fill="currentColor"
+          height={18}
+          stroke="currentColor"
+          strokeWidth="0"
+          style={
+            Object {
+              "color": "#fff76a",
+            }
+          }
+          viewBox="0 0 24 24"
+          width={18}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+          />
+        </svg>
+      </button>
+      <button
+        className="card-actions-btn"
+        onClick={[Function]}
+      >
+        <svg
+          color="#cccaca"
+          fill="currentColor"
+          height={18}
+          stroke="currentColor"
+          strokeWidth="0"
+          style={
+            Object {
+              "color": "#cccaca",
+            }
+          }
+          viewBox="0 0 24 24"
+          width={18}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>,
+]
+`;

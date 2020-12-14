@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot test for search textfield container snapshot:  1`] = `
+<div
+  className="textfield-wrapper"
+>
+  <label
+    className="header"
+  >
+    Friends List
+  </label>
+  <input
+    onChange={[Function]}
+    onKeyPress={[Function]}
+    placeholder="Enter your friend's name"
+    value=""
+  />
+</div>
+`;

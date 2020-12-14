@@ -7,66 +7,6 @@
   border-color: lightgray;
   border-width: 0.5px;
 }
-.textfield-wrapper {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  background-color: #cccaca;
-}
-.header {
-  font: 400 18px Roboto-Medium;
-  font-style: bold;
-  padding: 8px 12px 8px 12px;
-}
-.card {
-  display: flex;
-  flex: 1;
-  flex-direction: row;
-  border-top-style: solid;
-  border-color: #cccaca;
-  border-top-width: 0.5px;
-  height: 60px;
-}
-.card-data {
-  display: flex;
-  flex: 3;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0px 12px 0px 12px;
-}
-.card-label {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: flex-end;
-  font-size: 14px;
-  font-family: Roboto-Medium;
-  padding: 0px 0px 4px 0px;
-}
-.card-desc {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: flex-start;
-  font-size: 12px;
-  color: #4a4a4a;
-}
-.card-actions {
-  display: flex;
-  flex: 1;
-  align-items: center;
-  justify-content: space-between;
-}
-.card-actions-btn {
-  display: flex;
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  margin: 0px 12px 0px 12px;
-  background-color: white;
-  border-radius: 4px;
-  border-color: #cccaca;
-}
 .no-data {
   display: flex;
   flex: 1;
@@ -77,31 +17,4 @@
   align-items: center;
   justify-content: center;
   padding: 24px 12px 24px 12px;
-}
-.card-actions-btn-fav {
-  background-color: #cccaca !important;
-  display: flex;
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  margin: 0px 12px 0px 12px;
-  background-color: white;
-  border-radius: 4px;
-  border-color: #cccaca;
-}
-.pagination-container {
-  display: flex;
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  padding: 12px 0px 12px 0px;
-}
-.pagination-counter {
-  padding: 0px 12px 0px 12px;
-}
-.next-prev {
-  display: flex;
-  width: 28px;
-  align-items: center;
-  justify-content: space-between;
 }

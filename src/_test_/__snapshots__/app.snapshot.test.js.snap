@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app snapshot test snapshot:  1`] = `
+<div
+  className="container"
+>
+  <div
+    className="textfield-wrapper"
+  >
+    <label
+      className="header"
+    >
+      Friends List
+    </label>
+    <input
+      onChange={[Function]}
+      onKeyPress={[Function]}
+      placeholder="Enter your friend's name"
+      value=""
+    />
+  </div>
+  <div
+    className="no-data"
+  >
+    <label>
+      You have not added any friend.
+    </label>
+  </div>
+</div>
+`;
+
+exports[`snapshot:  1`] = `
+<div
+  className="container"
+>
+  <div
+    className="textfield-wrapper"
+  >
+    <label
+      className="header"
+    >
+      Friends List
+    </label>
+    <input
+      onChange={[Function]}
+      onKeyPress={[Function]}
+      placeholder="Enter your friend's name"
+      value=""
+    />
+  </div>
+  <div
+    className="no-data"
+  >
+    <label>
+      You have not added any friend.
+    </label>
+  </div>
+</div>
+`;

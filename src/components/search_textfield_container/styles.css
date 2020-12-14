@@ -1,0 +1,11 @@
+.textfield-wrapper {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    background-color: #cccaca;
+}
+.header {
+    font: 400 18px Roboto-Medium;
+    font-style: bold;
+    padding: 8px 12px 8px 12px;
+}
